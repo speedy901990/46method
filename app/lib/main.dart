@@ -1,19 +1,98 @@
 import 'package:flutter/material.dart';
+import 'package:group_button/group_button.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '4-6 method',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('4-6 method')),
-        body: const Center(child: Text("Hello Coffee!")),
+      title: 'Personal Expenses',
+      home: HomePage(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.brown)
+            .copyWith(secondary: Colors.amber),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('4-6 method'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            height: 150,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text('Coffee, Grind, Water setting'),
+              ],
+            ),
+          ),
+          Container(
+            height: 80,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Brewing Profile'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GroupButton(
+                      buttons: ['sweet', 'balanced', 'acidic'],
+                      selectedShadow: const [],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 30,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text('Brew'),
+              ],
+            ),
+          ),
+          Container(
+            height: 300,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text('Brewing Progress'),
+              ],
+            ),
+          ),
+          Container(
+            height: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Brew'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Settings'),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
