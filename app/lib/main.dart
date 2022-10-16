@@ -51,7 +51,12 @@ class HomePage extends StatelessWidget {
                   children: [
                     GroupButton(
                       buttons: ['sweet', 'balanced', 'acidic'],
-                      selectedShadow: const [],
+                      options: GroupButtonOptions(
+                        selectedShadow: const [],
+                        groupingType: GroupingType.wrap,
+                        elevation: 0,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                   ],
                 ),
