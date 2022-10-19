@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+
+import 'package:app/widgets/navigation_tab_bar.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,12 +20,6 @@ class MyApp extends StatelessWidget {
 }
 
 class App extends StatelessWidget {
-  List<IconData> _iconList = [
-    Icons.coffee_maker,
-    Icons.settings,
-  ];
-  int _bottomNavIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,16 +83,12 @@ class App extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        icons: _iconList,
-        activeIndex: _bottomNavIndex,
-        gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.verySmoothEdge,
-        leftCornerRadius: 32,
-        rightCornerRadius: 32,
-        onTap: (index) {},
-        //other params
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        //params
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: NavigationTabBar(),
     );
   }
 }
