@@ -6,22 +6,18 @@ import 'brew_page.dart';
 import 'settings_page.dart';
 
 class StylishNavigationBar extends StatefulWidget {
-  dynamic selected;
-  PageController controller;
-
-  StylishNavigationBar(this.controller);
-
   @override
   State<StylishNavigationBar> createState() => _StylishNavigationBarState();
 }
 
 class _StylishNavigationBarState extends State<StylishNavigationBar> {
+  dynamic selected;
   var heart = false;
   PageController controller = PageController();
 
   @override
   void dispose() {
-    widget.controller.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -67,11 +63,11 @@ class _StylishNavigationBarState extends State<StylishNavigationBar> {
         hasNotch: true,
         fabLocation: StylishBarFabLocation.end,
         opacity: 0.3,
-        currentIndex: widget.selected ?? 0,
+        currentIndex: selected ?? 0,
         onTap: (index) {
-          widget.controller.jumpToPage(index!);
+          controller.jumpToPage(index!);
           setState(() {
-            widget.selected = index;
+            selected = index;
           });
         },
       ),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:app/widgets/brew_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
@@ -29,17 +30,15 @@ class _AnimatedNavigationBarState extends State<AnimatedNavigationBar>
   late CurvedAnimation borderRadiusCurve;
   late AnimationController _hideBottomBarAnimationController;
 
-  final iconList = <IconData>[
-    Icons.brightness_5,
-    Icons.brightness_4,
-    Icons.brightness_6,
-    Icons.brightness_7,
+  final iconList = [
+    {Icons.coffee_maker, 'Brew'},
+    {Icons.settings, 'Settings'},
   ];
 
   @override
   void initState() {
     super.initState();
-    final systemTheme = SystemUiOverlayStyle.light.copyWith(
+    final systemTheme = SystemUiOverlayStyle.dark.copyWith(
       systemNavigationBarColor: HexColor('#373A36'),
       systemNavigationBarIconBrightness: Brightness.light,
     );
@@ -108,15 +107,22 @@ class _AnimatedNavigationBarState extends State<AnimatedNavigationBar>
       child: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          title: Text(
-            widget.title,
-            style: TextStyle(color: Colors.white),
+          title: Center(
+            child: Text(
+              widget.title,
+              style: TextStyle(color: Colors.white),
+            ),
           ),
           backgroundColor: HexColor('#373A36'),
         ),
         body: NotificationListener<ScrollNotification>(
           onNotification: onScrollNotification,
-          child: NavigationScreen(iconList[_bottomNavIndex]),
+          child: _bottomNavIndex == 0
+              ? Container(
+                  color: Colors.brown,
+                  child: BrewPage(),
+                )
+              : NavigationScreen(iconList[_bottomNavIndex].first as IconData),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: HexColor('#FFA400'),
@@ -141,7 +147,7 @@ class _AnimatedNavigationBarState extends State<AnimatedNavigationBar>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  iconList[index],
+                  iconList[index].first as IconData,
                   size: 24,
                   color: color,
                 ),
@@ -149,7 +155,7 @@ class _AnimatedNavigationBarState extends State<AnimatedNavigationBar>
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: AutoSizeText(
-                    "brightness $index",
+                    iconList[index].last as String,
                     maxLines: 1,
                     style: TextStyle(color: color),
                     group: autoSizeGroup,
@@ -238,7 +244,7 @@ class _NavigationScreenState extends State<NavigationScreen>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.brown,
       child: ListView(
         children: [
           SizedBox(height: 64),

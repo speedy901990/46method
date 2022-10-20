@@ -23,7 +23,8 @@ class Method46 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedNavigationBar(
-      title: '46 Method',
+      title: '4-6 Method',
     );
+    //return StylishNavigationBar();
   }
 }
