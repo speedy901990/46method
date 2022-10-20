@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:group_button/group_button.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
-import 'package:app/widgets/navigation_tab_bar.dart';
+import 'widgets/brew_page.dart';
+import 'widgets/settings_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,8 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Personal Expenses',
-      home: App(),
+      title: '4-6 Method',
+      home: Method46(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.brown)
             .copyWith(secondary: Colors.amber),
@@ -19,7 +21,26 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class App extends StatelessWidget {
+class Method46 extends StatefulWidget {
+  const Method46({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<Method46> createState() => _Method46State();
+}
+
+class _Method46State extends State<Method46> {
+  dynamic selected;
+  var heart = false;
+  PageController controller = PageController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,68 +48,71 @@ class App extends StatelessWidget {
         centerTitle: true,
         title: const Text('4-6 method'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            height: 150,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('Coffee, Grind, Water setting'),
-              ],
-            ),
-          ),
-          Container(
-            height: 80,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Brewing Profile'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GroupButton(
-                      buttons: ['sweet', 'balanced', 'acidic'],
-                      options: GroupButtonOptions(
-                        selectedShadow: const [],
-                        groupingType: GroupingType.wrap,
-                        elevation: 0,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 30,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('Brew'),
-              ],
-            ),
-          ),
-          Container(
-            height: 300,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('Brewing Progress'),
-              ],
-            ),
-          ),
+      //extendBody: true, //to make floating action button notch transparent
+
+      //to avoid the floating action button overlapping behavior,
+      // when a soft keyboard is displayed
+      //resizeToAvoidBottomInset: false,
+
+      bottomNavigationBar: StylishBottomBar(
+        items: [
+          AnimatedBarItems(
+              icon: const Icon(
+                Icons.coffee_maker_outlined,
+              ),
+              selectedIcon: const Icon(
+                Icons.coffee_maker,
+              ),
+              backgroundColor: Colors.amber,
+              selectedColor: Colors.deepOrangeAccent,
+              title: const Text('Brew')),
+          AnimatedBarItems(
+              icon: const Icon(
+                Icons.settings_outlined,
+              ),
+              selectedIcon: const Icon(
+                Icons.settings,
+              ),
+              backgroundColor: Colors.brown,
+              selectedColor: Colors.amberAccent,
+              title: const Text('Settings')),
         ],
+        iconSize: 32,
+        barAnimation: BarAnimation.fade,
+        iconStyle: IconStyle.animated,
+        hasNotch: true,
+        fabLocation: StylishBarFabLocation.end,
+        opacity: 0.3,
+        currentIndex: selected ?? 0,
+        onTap: (index) {
+          controller.jumpToPage(index!);
+          setState(() {
+            selected = index;
+          });
+        },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        //params
+        onPressed: () {
+          setState(() {
+            heart = !heart;
+          });
+        },
+        backgroundColor: Colors.white,
+        child: Icon(
+          heart ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
+          color: Colors.red,
+        ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: NavigationTabBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      body: SafeArea(
+        child: PageView(
+          controller: controller,
+          children: const [
+            BrewPage(),
+            SettingsPage(),
+          ],
+        ),
+      ),
     );
   }
 }
