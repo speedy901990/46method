@@ -4,6 +4,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:app/widgets/brew_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -126,10 +127,7 @@ class _AnimatedNavigationBarState extends State<AnimatedNavigationBar>
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: HexColor('#FFA400'),
-          child: Icon(
-            Icons.brightness_3,
-            color: HexColor('#373A36'),
-          ),
+          child: FaIcon(FontAwesomeIcons.mugHot),
           onPressed: () {
             _fabAnimationController.reset();
             _borderRadiusAnimationController.reset();
