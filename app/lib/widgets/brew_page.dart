@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:group_button/group_button.dart';
 
-class BrewPage extends StatelessWidget {
+class BrewPage extends StatefulWidget {
   const BrewPage({super.key});
+
+  @override
+  State<BrewPage> createState() => _BrewPageState();
+}
+
+class _BrewPageState extends State<BrewPage> {
+  var brewSettingSwitchValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +20,71 @@ class BrewPage extends StatelessWidget {
       children: [
         Container(
           height: 150,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Coffee, Grind, Water setting'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        child: Text('Coffee'),
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                    Switch(
+                      activeTrackColor: Colors.green,
+                      inactiveTrackColor: Colors.green,
+                      activeColor: Colors.amber,
+                      inactiveThumbColor: Colors.orangeAccent,
+                      value: brewSettingSwitchValue,
+                      onChanged: (value) =>
+                          setState(() => brewSettingSwitchValue = value),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        child: Text('Water'),
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      child: Text('Grinder'),
+                      color: Colors.blueGrey,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      child: Text('Ground Size'),
+                      color: Colors.blueGrey,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
