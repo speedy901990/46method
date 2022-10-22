@@ -16,12 +16,15 @@ class _BrewPageState extends State<BrewPage> {
 
   @override
   Widget build(BuildContext context) {
+    double totalWidth = MediaQuery.of(context).size.width;
+    double totalHeight = MediaQuery.of(context).size.height;
+    print("${totalWidth}, ${totalHeight}");
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          height: 150,
+          height: totalHeight / 5,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,7 +94,7 @@ class _BrewPageState extends State<BrewPage> {
           ),
         ),
         Container(
-          height: 80,
+          height: totalHeight / 10,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -114,7 +117,7 @@ class _BrewPageState extends State<BrewPage> {
           ),
         ),
         Container(
-          height: 400,
+          height: totalHeight / 2,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
