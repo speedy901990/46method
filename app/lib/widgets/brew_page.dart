@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:group_button/group_button.dart';
 
 class BrewPage extends StatefulWidget {
@@ -112,20 +114,45 @@ class _BrewPageState extends State<BrewPage> {
           ),
         ),
         Container(
-          height: 30,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          height: 400,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('Brew'),
-            ],
-          ),
-        ),
-        Container(
-          height: 300,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text('Brewing Progress'),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text('Brew'),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      Text('Water'),
+                      Text('0 g'),
+                      Text('100 g'),
+                      Text('200 g'),
+                      Text('300 g'),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('Time'),
+                      Text('0:00 min'),
+                      Text('0:45 min'),
+                      Text('1:15 min'),
+                      Text('2:00 min'),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text('Progress'),
+                      FaIcon(FontAwesomeIcons.mugHot)
+                    ],
+                  ),
+                ],
+              )
             ],
           ),
         ),
