@@ -88,11 +88,6 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    final systemTheme = SystemUiOverlayStyle.dark.copyWith(
-      systemNavigationBarColor: Theme.of(context).colorScheme.background,
-      systemNavigationBarIconBrightness: Brightness.light,
-    );
-    SystemChrome.setSystemUIOverlayStyle(systemTheme);
 
     _fabAnimationController = AnimationController(
       duration: const Duration(milliseconds: 500),
@@ -148,6 +143,16 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
       }
     }
     return false;
+  }
+
+  @override
+  void didChangeDependencies() {
+    final systemTheme = SystemUiOverlayStyle.dark.copyWith(
+      systemNavigationBarColor: Theme.of(context).colorScheme.background,
+      systemNavigationBarIconBrightness: Brightness.light,
+    );
+    SystemChrome.setSystemUIOverlayStyle(systemTheme);
+    super.didChangeDependencies();
   }
 
   @override
