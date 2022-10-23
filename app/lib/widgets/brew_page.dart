@@ -1,3 +1,4 @@
+import 'package:app/models/hex_color.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -98,18 +99,22 @@ class _BrewPageState extends State<BrewPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Brewing Profile'),
+              Text(
+                'Brewing Profile',
+                style: Theme.of(context).textTheme.headline1,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GroupButton(
                     buttons: ['sweet', 'balanced', 'acidic'],
                     options: GroupButtonOptions(
-                      selectedShadow: const [],
-                      groupingType: GroupingType.wrap,
-                      elevation: 0,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                        selectedShadow: const [],
+                        groupingType: GroupingType.wrap,
+                        elevation: 0,
+                        borderRadius: BorderRadius.circular(20),
+                        selectedColor: HexColor('#74AF94'),
+                        unselectedColor: HexColor('#C6C2B9')),
                   ),
                 ],
               ),
@@ -131,7 +136,10 @@ class _BrewPageState extends State<BrewPage> {
                 children: [
                   Column(
                     children: [
-                      Text('Water'),
+                      Text(
+                        'Water',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
                       Text('0 g'),
                       Text('100 g'),
                       Text('200 g'),
@@ -140,7 +148,8 @@ class _BrewPageState extends State<BrewPage> {
                   ),
                   Column(
                     children: [
-                      Text('Time'),
+                      Text('Time',
+                          style: Theme.of(context).textTheme.bodyText1),
                       Text('0:00 min'),
                       Text('0:45 min'),
                       Text('1:15 min'),
@@ -150,7 +159,8 @@ class _BrewPageState extends State<BrewPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('Progress'),
+                      Text('Progress',
+                          style: Theme.of(context).textTheme.bodyText1),
                       FaIcon(FontAwesomeIcons.mugHot)
                     ],
                   ),

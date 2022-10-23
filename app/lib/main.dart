@@ -30,6 +30,24 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
                 primarySwatch: HexColor.getPrimarySwatch('#7A6755'))
             .copyWith(secondary: HexColor('#FFA400')),
+        textTheme: ThemeData.dark().textTheme.copyWith(
+              bodyText1: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Colors.yellow,
+              ),
+              headline1: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 20),
+              headline6: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
+              ),
+            ),
       ),
     );
   }
