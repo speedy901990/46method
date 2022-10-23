@@ -41,7 +41,7 @@ class _BrewPageState extends State<BrewPage> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: Text('Coffee'),
+                        child: Center(child: Text('Coffee')),
                         color: Colors.blueGrey,
                       ),
                     ),
@@ -60,7 +60,7 @@ class _BrewPageState extends State<BrewPage> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: Text('Water'),
+                        child: Center(child: Text('Water')),
                         color: Colors.blueGrey,
                       ),
                     ),
@@ -75,17 +75,8 @@ class _BrewPageState extends State<BrewPage> {
                     padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
                     child: Container(
                       height: 50,
-                      width: 50,
-                      child: Text('Grinder'),
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      child: Text('Ground Size'),
+                      width: 210,
+                      child: Center(child: Text('Grind')),
                       color: Colors.blueGrey,
                     ),
                   ),
