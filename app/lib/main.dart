@@ -79,6 +79,8 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
   late CurvedAnimation fabCurve;
   late CurvedAnimation borderRadiusCurve;
   late AnimationController _hideBottomBarAnimationController;
+  late AppBar _appBar;
+  late AnimatedBottomNavigationBar _bottomNavBar;
 
   final iconList = [
     {Icons.coffee_maker, 'Brew'},
@@ -126,7 +128,7 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
     );
   }
 
-  bool onScrollNotification(ScrollNotification notification) {
+  bool _onScrollNotification(ScrollNotification notification) {
     if (notification is UserScrollNotification &&
         notification.metrics.axis == Axis.vertical) {
       switch (notification.direction) {
@@ -152,29 +154,93 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
       systemNavigationBarIconBrightness: Brightness.light,
     );
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
+
+    _appBar = AppBar(
+      title: const Center(
+        child: Text(
+          "4-6 Method",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      backgroundColor: Theme.of(context).colorScheme.background,
+    );
+
+    _bottomNavBar = AnimatedBottomNavigationBar.builder(
+      itemCount: iconList.length,
+      tabBuilder: (int index, bool isActive) {
+        final color =
+            isActive ? Theme.of(context).colorScheme.secondary : Colors.white;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              iconList[index].first as IconData,
+              size: 24,
+              color: color,
+            ),
+            const SizedBox(height: 4),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: AutoSizeText(
+                iconList[index].last as String,
+                maxLines: 1,
+                style: TextStyle(color: color),
+                group: autoSizeGroup,
+              ),
+            )
+          ],
+        );
+      },
+      backgroundColor: Theme.of(context).colorScheme.background,
+      activeIndex: _bottomNavIndex,
+      splashColor: Theme.of(context).colorScheme.secondary,
+      notchAndCornersAnimation: borderRadiusAnimation,
+      splashSpeedInMilliseconds: 300,
+      notchSmoothness: NotchSmoothness.defaultEdge,
+      gapLocation: GapLocation.center,
+      leftCornerRadius: 32,
+      rightCornerRadius: 32,
+      onTap: (index) => setState(() => _bottomNavIndex = index),
+      hideAnimationController: _hideBottomBarAnimationController,
+      shadow: BoxShadow(
+        offset: const Offset(0, 1),
+        blurRadius: 12,
+        spreadRadius: 0.5,
+        color: Theme.of(context).colorScheme.secondary,
+      ),
+      height: 60,
+    );
+
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final pageHeight = mediaQuery.size.height -
+        _appBar.preferredSize.height -
+        mediaQuery.padding.top -
+        _bottomNavBar.height!;
+
     return Scaffold(
       extendBody: true,
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            "4-6 Method",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.background,
-      ),
+      appBar: _appBar,
       body: NotificationListener<ScrollNotification>(
-        onNotification: onScrollNotification,
+        onNotification: _onScrollNotification,
         child: _bottomNavIndex == 0
-            ? Container(
-                child: NavigationScreen(const BrewPage()),
+            ? NavigationScreen(
+                Container(
+                  child: const BrewPage(),
+                  height: pageHeight,
+                ),
               )
-            : NavigationScreen(const SettingsPage()),
+            : NavigationScreen(
+                Container(
+                  child: const SettingsPage(),
+                  height: pageHeight,
+                ),
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -187,51 +253,7 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AnimatedBottomNavigationBar.builder(
-        itemCount: iconList.length,
-        tabBuilder: (int index, bool isActive) {
-          final color =
-              isActive ? Theme.of(context).colorScheme.secondary : Colors.white;
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                iconList[index].first as IconData,
-                size: 24,
-                color: color,
-              ),
-              const SizedBox(height: 4),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: AutoSizeText(
-                  iconList[index].last as String,
-                  maxLines: 1,
-                  style: TextStyle(color: color),
-                  group: autoSizeGroup,
-                ),
-              )
-            ],
-          );
-        },
-        backgroundColor: Theme.of(context).colorScheme.background,
-        activeIndex: _bottomNavIndex,
-        splashColor: Theme.of(context).colorScheme.secondary,
-        notchAndCornersAnimation: borderRadiusAnimation,
-        splashSpeedInMilliseconds: 300,
-        notchSmoothness: NotchSmoothness.defaultEdge,
-        gapLocation: GapLocation.center,
-        leftCornerRadius: 32,
-        rightCornerRadius: 32,
-        onTap: (index) => setState(() => _bottomNavIndex = index),
-        hideAnimationController: _hideBottomBarAnimationController,
-        shadow: BoxShadow(
-          offset: const Offset(0, 1),
-          blurRadius: 12,
-          spreadRadius: 0.5,
-          color: Theme.of(context).colorScheme.secondary,
-        ),
-      ),
+      bottomNavigationBar: _bottomNavBar,
     );
   }
 }
