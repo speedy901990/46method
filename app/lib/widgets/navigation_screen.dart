@@ -1,10 +1,11 @@
-import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
 
-class NavigationScreen extends StatefulWidget {
-  final IconData iconData;
+import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 
-  NavigationScreen(this.iconData) : super();
+class NavigationScreen extends StatefulWidget {
+  final Widget pageBody;
+
+  NavigationScreen(this.pageBody) : super();
 
   @override
   _NavigationScreenState createState() => _NavigationScreenState();
@@ -18,7 +19,7 @@ class _NavigationScreenState extends State<NavigationScreen>
   @override
   void didUpdateWidget(NavigationScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.iconData != widget.iconData) {
+    if (oldWidget.pageBody != widget.pageBody) {
       _startAnimation();
     }
   }
@@ -58,7 +59,7 @@ class _NavigationScreenState extends State<NavigationScreen>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.brown,
+      color: Theme.of(context).colorScheme.primary,
       child: ListView(
         children: [
           SizedBox(height: 64),
@@ -67,27 +68,11 @@ class _NavigationScreenState extends State<NavigationScreen>
               animation: animation,
               centerOffset: Offset(80, 80),
               maxRadius: MediaQuery.of(context).size.longestSide * 1.1,
-              child: Icon(
-                widget.iconData,
-                color: HexColor('#FFA400'),
-                size: 160,
-              ),
+              child: widget.pageBody,
             ),
           ),
         ],
       ),
     );
-  }
-}
-
-class HexColor extends Color {
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
-
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll('#', '');
-    if (hexColor.length == 6) {
-      hexColor = 'FF' + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
   }
 }
