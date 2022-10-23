@@ -14,6 +14,13 @@ class BrewPage extends StatefulWidget {
 
 class _BrewPageState extends State<BrewPage> {
   var brewSettingSwitchValue = false;
+  final _brewProfileController = GroupButtonController();
+
+  @override
+  void initState() {
+    _brewProfileController.selectIndex(1);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +53,11 @@ class _BrewPageState extends State<BrewPage> {
                       ),
                     ),
                     Switch(
-                      activeTrackColor: Colors.green,
-                      inactiveTrackColor: Colors.green,
-                      activeColor: Colors.amber,
-                      inactiveThumbColor: Colors.orangeAccent,
+                      activeTrackColor: Theme.of(context).colorScheme.surface,
+                      inactiveTrackColor: Theme.of(context).colorScheme.surface,
+                      activeColor: Theme.of(context).colorScheme.secondary,
+                      inactiveThumbColor:
+                          Theme.of(context).colorScheme.secondary,
                       value: brewSettingSwitchValue,
                       onChanged: (value) =>
                           setState(() => brewSettingSwitchValue = value),
@@ -98,14 +106,16 @@ class _BrewPageState extends State<BrewPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GroupButton(
+                    controller: _brewProfileController,
                     buttons: ['sweet', 'balanced', 'acidic'],
                     options: GroupButtonOptions(
                         selectedShadow: const [],
                         groupingType: GroupingType.wrap,
                         elevation: 0,
                         borderRadius: BorderRadius.circular(20),
-                        selectedColor: HexColor('#74AF94'),
-                        unselectedColor: HexColor('#C6C2B9')),
+                        selectedColor: Theme.of(context).colorScheme.surface,
+                        unselectedColor:
+                            Theme.of(context).colorScheme.surfaceVariant),
                   ),
                 ],
               ),
@@ -129,29 +139,36 @@ class _BrewPageState extends State<BrewPage> {
                     children: [
                       Text(
                         'Water',
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.headline2,
                       ),
-                      Text('0 g'),
-                      Text('100 g'),
-                      Text('200 g'),
-                      Text('300 g'),
+                      Text('0 g', style: Theme.of(context).textTheme.bodyText1),
+                      Text('100 g',
+                          style: Theme.of(context).textTheme.bodyText1),
+                      Text('200 g',
+                          style: Theme.of(context).textTheme.bodyText1),
+                      Text('300 g',
+                          style: Theme.of(context).textTheme.bodyText1),
                     ],
                   ),
                   Column(
                     children: [
                       Text('Time',
+                          style: Theme.of(context).textTheme.headline2),
+                      Text('0:00 min',
                           style: Theme.of(context).textTheme.bodyText1),
-                      Text('0:00 min'),
-                      Text('0:45 min'),
-                      Text('1:15 min'),
-                      Text('2:00 min'),
+                      Text('0:45 min',
+                          style: Theme.of(context).textTheme.bodyText1),
+                      Text('1:15 min',
+                          style: Theme.of(context).textTheme.bodyText1),
+                      Text('2:00 min',
+                          style: Theme.of(context).textTheme.bodyText1),
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text('Progress',
-                          style: Theme.of(context).textTheme.bodyText1),
+                          style: Theme.of(context).textTheme.headline2),
                       FaIcon(FontAwesomeIcons.mugHot)
                     ],
                   ),

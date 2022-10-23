@@ -29,20 +29,30 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
                 primarySwatch: HexColor.getPrimarySwatch('#7A6755'))
-            .copyWith(secondary: HexColor('#FFA400')),
+            .copyWith(
+          secondary: HexColor('#FFA400'),
+          surface: HexColor('#74AF94'),
+          surfaceVariant: HexColor('#C6C2B9'),
+          background: HexColor('#373A36'),
+        ),
         textTheme: ThemeData.dark().textTheme.copyWith(
-              bodyText1: TextStyle(
+              bodyText1: const TextStyle(
                 fontFamily: 'OpenSans',
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: Colors.yellow,
+                color: Colors.white,
               ),
               headline1: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: HexColor('#F4EEC5'),
                   fontSize: 20),
-              headline6: TextStyle(
+              headline2: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                  color: HexColor('#F4EEC5'),
+                  fontSize: 15),
+              headline6: const TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
                 fontSize: 28,
@@ -79,26 +89,26 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     final systemTheme = SystemUiOverlayStyle.dark.copyWith(
-      systemNavigationBarColor: HexColor('#373A36'),
+      systemNavigationBarColor: Theme.of(context).colorScheme.background,
       systemNavigationBarIconBrightness: Brightness.light,
     );
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
 
     _fabAnimationController = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _borderRadiusAnimationController = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     fabCurve = CurvedAnimation(
       parent: _fabAnimationController,
-      curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
+      curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
     );
     borderRadiusCurve = CurvedAnimation(
       parent: _borderRadiusAnimationController,
-      curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
+      curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
     );
 
     fabAnimation = Tween<double>(begin: 0, end: 1).animate(fabCurve);
@@ -107,16 +117,16 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
     );
 
     _hideBottomBarAnimationController = AnimationController(
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
     );
 
     Future.delayed(
-      Duration(seconds: 1),
+      const Duration(seconds: 1),
       () => _fabAnimationController.forward(),
     );
     Future.delayed(
-      Duration(seconds: 1),
+      const Duration(seconds: 1),
       () => _borderRadiusAnimationController.forward(),
     );
   }
@@ -145,25 +155,25 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
             "4-6 Method",
             style: TextStyle(color: Colors.white),
           ),
         ),
-        backgroundColor: HexColor('#373A36'),
+        backgroundColor: Theme.of(context).colorScheme.background,
       ),
       body: NotificationListener<ScrollNotification>(
         onNotification: onScrollNotification,
         child: _bottomNavIndex == 0
             ? Container(
-                child: NavigationScreen(BrewPage()),
+                child: NavigationScreen(const BrewPage()),
               )
-            : NavigationScreen(SettingsPage()),
+            : NavigationScreen(const SettingsPage()),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        child: FaIcon(FontAwesomeIcons.mugHot),
+        child: const FaIcon(FontAwesomeIcons.mugHot),
         onPressed: () {
           _fabAnimationController.reset();
           _borderRadiusAnimationController.reset();
@@ -199,7 +209,7 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
             ],
           );
         },
-        backgroundColor: HexColor('#373A36'),
+        backgroundColor: Theme.of(context).colorScheme.background,
         activeIndex: _bottomNavIndex,
         splashColor: Theme.of(context).colorScheme.secondary,
         notchAndCornersAnimation: borderRadiusAnimation,
@@ -211,7 +221,7 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
         onTap: (index) => setState(() => _bottomNavIndex = index),
         hideAnimationController: _hideBottomBarAnimationController,
         shadow: BoxShadow(
-          offset: Offset(0, 1),
+          offset: const Offset(0, 1),
           blurRadius: 12,
           spreadRadius: 0.5,
           color: Theme.of(context).colorScheme.secondary,
