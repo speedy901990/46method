@@ -29,7 +29,6 @@ class _BrewPageState extends State<BrewPage> {
         height: constraints.maxHeight,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
               height: constraints.maxHeight * 0.25,
@@ -77,7 +76,6 @@ class _BrewPageState extends State<BrewPage> {
                       ],
                     ),
                   ),
-                  Container(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -134,7 +132,10 @@ class _BrewPageState extends State<BrewPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text('Brew'),
+                    child: Text(
+                      'Brew Steps',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -169,13 +170,16 @@ class _BrewPageState extends State<BrewPage> {
                               style: Theme.of(context).textTheme.bodyText1),
                         ],
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('Progress',
-                              style: Theme.of(context).textTheme.headline2),
-                          FaIcon(FontAwesomeIcons.mugHot)
-                        ],
+                      Container(
+                        height: constraints.maxHeight * 0.6 * 0.25,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text('Progress',
+                                style: Theme.of(context).textTheme.headline2),
+                            FaIcon(FontAwesomeIcons.mugHot)
+                          ],
+                        ),
                       ),
                     ],
                   )

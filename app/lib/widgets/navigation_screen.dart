@@ -62,7 +62,6 @@ class _NavigationScreenState extends State<NavigationScreen>
       color: Theme.of(context).colorScheme.primary,
       child: ListView(
         children: [
-          SizedBox(height: 64),
           Center(
             child: CircularRevealAnimation(
               animation: animation,
