@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(
                 primarySwatch: HexColor.getPrimarySwatch('#7A6755'))
             .copyWith(
+          primary: HexColor('#7A6755'),
           secondary: HexColor('#FFA400'),
           surface: HexColor('#74AF94'),
           surfaceVariant: HexColor('#C6C2B9'),
@@ -155,6 +156,11 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
     );
     SystemChrome.setSystemUIOverlayStyle(systemTheme);
 
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     _appBar = AppBar(
       title: const Center(
         child: Text(
@@ -193,8 +199,8 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
         );
       },
       backgroundColor: Theme.of(context).colorScheme.background,
-      activeIndex: _bottomNavIndex,
       splashColor: Theme.of(context).colorScheme.secondary,
+      activeIndex: _bottomNavIndex,
       notchAndCornersAnimation: borderRadiusAnimation,
       splashSpeedInMilliseconds: 300,
       notchSmoothness: NotchSmoothness.defaultEdge,
@@ -212,11 +218,6 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
       height: 60,
     );
 
-    super.didChangeDependencies();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final pageHeight = mediaQuery.size.height -
         _appBar.preferredSize.height -
