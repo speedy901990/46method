@@ -99,9 +99,12 @@ class _BrewPageState extends State<BrewPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Brewing Profile',
-                    style: Theme.of(context).textTheme.headline1,
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      'Brewing Profile',
+                      style: Theme.of(context).textTheme.headline1,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
