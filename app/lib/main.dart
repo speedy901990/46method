@@ -10,8 +10,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:app/widgets/navigation_screen.dart';
 import 'package:app/models/hex_color.dart';
-import 'package:app/widgets/brew_page.dart';
-import 'package:app/widgets/settings_page.dart';
+import 'package:app/widgets/brew_page/brew.dart';
+import 'package:app/widgets/settings_page/settings_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

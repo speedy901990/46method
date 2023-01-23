@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:group_button/group_button.dart';
 
+import 'package:app/widgets/brew_page/brew_setup.dart';
+
 class BrewPage extends StatefulWidget {
   const BrewPage({super.key});
 
@@ -13,7 +15,6 @@ class BrewPage extends StatefulWidget {
 }
 
 class _BrewPageState extends State<BrewPage> {
-  var brewSettingSwitchValue = false;
   final _brewProfileController = GroupButtonController();
 
   @override
@@ -32,67 +33,7 @@ class _BrewPageState extends State<BrewPage> {
           children: [
             Container(
               height: constraints.maxHeight * 0.25,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            child: Center(child: Text('Coffee')),
-                            color: Colors.blueGrey,
-                          ),
-                        ),
-                        Switch(
-                          activeTrackColor:
-                              Theme.of(context).colorScheme.surface,
-                          inactiveTrackColor:
-                              Theme.of(context).colorScheme.surface,
-                          activeColor: Theme.of(context).colorScheme.secondary,
-                          inactiveThumbColor:
-                              Theme.of(context).colorScheme.secondary,
-                          value: brewSettingSwitchValue,
-                          onChanged: (value) =>
-                              setState(() => brewSettingSwitchValue = value),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          child: Container(
-                            height: 50,
-                            width: 50,
-                            child: Center(child: Text('Water')),
-                            color: Colors.blueGrey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 60, vertical: 10),
-                        child: Container(
-                          height: 50,
-                          width: 210,
-                          child: Center(child: Text('Grind')),
-                          color: Colors.blueGrey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              child: BrewSetup(),
             ),
             Container(
               height: constraints.maxHeight * 0.15,
