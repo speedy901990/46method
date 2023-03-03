@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       title: '4-6 Method',
       home: Method46(),
       theme: ThemeData(
+        useMaterial3: true,
         colorScheme: ColorScheme.fromSwatch(
                 primarySwatch: HexColor.getPrimarySwatch('#7A6755'))
             .copyWith(
