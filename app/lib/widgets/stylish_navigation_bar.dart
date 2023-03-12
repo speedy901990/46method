@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:stylish_bottom_bar/model/bar_items.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
+
 import 'brew_page.dart';
 import 'settings_page.dart';
 
@@ -35,8 +36,14 @@ class _StylishNavigationBarState extends State<StylishNavigationBar> {
       //resizeToAvoidBottomInset: false,
 
       bottomNavigationBar: StylishBottomBar(
+        option: AnimatedBarOptions(
+          iconSize: 32,
+          barAnimation: BarAnimation.fade,
+          iconStyle: IconStyle.animated,
+          opacity: 0.3,
+        ),  
         items: [
-          AnimatedBarItems(
+          BottomBarItem(
               icon: const Icon(
                 Icons.coffee_maker_outlined,
               ),
@@ -46,7 +53,7 @@ class _StylishNavigationBarState extends State<StylishNavigationBar> {
               backgroundColor: Colors.amber,
               selectedColor: Colors.deepOrangeAccent,
               title: const Text('Brew')),
-          AnimatedBarItems(
+          BottomBarItem(
               icon: const Icon(
                 Icons.settings_outlined,
               ),
@@ -56,13 +63,9 @@ class _StylishNavigationBarState extends State<StylishNavigationBar> {
               backgroundColor: Colors.brown,
               selectedColor: Colors.amberAccent,
               title: const Text('Settings')),
-        ],
-        iconSize: 32,
-        barAnimation: BarAnimation.fade,
-        iconStyle: IconStyle.animated,
+        ],      
         hasNotch: true,
         fabLocation: StylishBarFabLocation.end,
-        opacity: 0.3,
         currentIndex: selected ?? 0,
         onTap: (index) {
           controller.jumpToPage(index!);
