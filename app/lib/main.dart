@@ -38,23 +38,23 @@ class MyApp extends StatelessWidget {
           background: HexColor('#373A36'),
         ),
         textTheme: ThemeData.dark().textTheme.copyWith(
-              bodyText1: const TextStyle(
+              bodyLarge: const TextStyle(
                 fontFamily: 'OpenSans',
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
-              headline1: TextStyle(
+              displayLarge: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
                   color: HexColor('#F4EEC5'),
                   fontSize: 20),
-              headline2: TextStyle(
+              displayMedium: TextStyle(
                   fontFamily: 'OpenSans',
                   fontWeight: FontWeight.bold,
                   color: HexColor('#F4EEC5'),
                   fontSize: 15),
-              headline6: const TextStyle(
+              titleLarge: const TextStyle(
                 fontFamily: 'OpenSans',
                 fontWeight: FontWeight.bold,
                 fontSize: 28,
@@ -247,6 +247,9 @@ class _Method46State extends State<Method46> with TickerProviderStateMixin {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: const FaIcon(FontAwesomeIcons.mugHot),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(45.0)),
+        ),
         onPressed: () {
           _fabAnimationController.reset();
           _borderRadiusAnimationController.reset();
